@@ -1,5 +1,5 @@
 {
-  "name"       : "Whitetrefoil's Blog Publish Helper",
+  "name"       : "whitetrefoil-blog-publish-helper",
   "version"    : "0.1.0",
   "description": "Help to generate the code of image with flickr / 500px links.",
   "main"       : "eventPage.js",
