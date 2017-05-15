@@ -11,6 +11,10 @@
     {
       "matches": ["https://www.flickr.com/photos/*"],
       "js"     : ["flickr_content.js"]
+    },
+    {
+      "matches": ["*://www.whitetrefoil.com/blog/*"],
+      "js"     : ["wp_content.js"]
     }
   ],
   "browser_action"  : {

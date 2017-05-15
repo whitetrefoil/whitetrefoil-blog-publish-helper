@@ -4,6 +4,7 @@ function generateDescription(owner, ownerLink, title, flickrUrl, _500pxUrl) {
 
 chrome.browserAction.onClicked.addListener(() => {
   chrome.tabs.query({ url: ['https://www.flickr.com/photos/*', 'https://500px.com/photo/*'] }, (tabs) => {
+    const flickrTabs = []
     const flickrUrls = []
     const _500pxUrls = []
 
@@ -12,7 +13,10 @@ chrome.browserAction.onClicked.addListener(() => {
       const url = tabs[i].url
 
       const flickrMatch = url.match(/https:\/\/www.flickr.com\/photos\/.*?\/\d+/)
-      if (flickrMatch != null) { flickrUrls.push(flickrMatch[0]) }
+      if (flickrMatch != null) {
+        flickrUrls.push(flickrMatch[0])
+        flickrTabs.push(tabs[i])
+      }
 
       const _500pxMatch = url.match(/https:\/\/500px.com\/photo\/\d+/)
       if (_500pxMatch != null) { _500pxUrls.push(_500pxMatch[0]) }
@@ -31,13 +35,15 @@ chrome.browserAction.onClicked.addListener(() => {
       return
     }
 
-    chrome.tabs.sendMessage('get_flickr_info', (res) => {
+    chrome.tabs.sendMessage(flickrTabs[0].id, { type: 'get_flickr_info' }, (res) => {
       const caption = generateDescription(res.owner, res.ownerLink, res.title, flickrUrls[0], _500pxUrls[0])
-      chrome.tabs.sendMessage('fill_form', {
-        title: res.title,
-        caption,
+      chrome.tabs.query({ active: true, currentWindow: true }, (currentTabs) => {
+        chrome.tabs.sendMessage(currentTabs[0].id, {
+          type : 'fill_blog',
+          title: res.title,
+          caption,
+        })
       })
     })
   })
 })
-
