@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name"            : "Whitetrefoil's Blog Publish Helper",
+  "version"         : "0.1.0",
+  "description"     : "Help to generate the code of image with flickr / 500px links.",
+  "background"      : {
+    "scripts"   : ["eventPage.js"],
+    "persistent": false
+  },
+  "content_scripts" : [
+    {
+      "matches": ["https://www.flickr.com/photos/*"],
+      "js"     : ["flickr_content.js"]
+    }
+  ],
+  "browser_action"  : {
+    "default_title": "Whitetrefoil's Blog Publish Helper"
+  },
+  "permissions"     : [
+    "tabs",
+    "https://www.flickr.com/",
+    "https://500px.com/"
+  ]
+}

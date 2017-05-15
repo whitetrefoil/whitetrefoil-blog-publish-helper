@@ -1,0 +1,8 @@
+{
+  "name"       : "Whitetrefoil's Blog Publish Helper",
+  "version"    : "0.1.0",
+  "description": "Help to generate the code of image with flickr / 500px links.",
+  "main"       : "eventPage.js",
+  "author"     : "WhiteTrefoil <whitetrefoil@gmail.com>",
+  "license"    : "MIT"
+}
